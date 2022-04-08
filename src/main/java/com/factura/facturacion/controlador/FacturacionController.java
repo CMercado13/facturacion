@@ -27,41 +27,41 @@ public class FacturacionController {
 	private IFacturacionService facturacionService;
 
 	@GetMapping(value = "/obtenerFacturas")
-	public ResponseEntity<JsonResponse<FacturaDTO>> obtenerFacturas() {
+	public ResponseEntity<JsonResponse<FacturaDTO>> obtenerFacturas() throws Exception {
 		return facturacionService.obtenerFacturas();
 	}
 
 	@GetMapping(value = "/obtenerProductos")
-	public ResponseEntity<JsonResponse<ProductoDTO>> obtenerProductos() {
+	public ResponseEntity<JsonResponse<ProductoDTO>> obtenerProductos() throws Exception {
 		return facturacionService.obtenerProductos();
 	}
 
 	@GetMapping(value = "/obtenerFactura")
 	public ResponseEntity<JsonResponse<FacturaDTO>> obtenerFacturaPorId(
-			@NotNull @RequestParam(value = "idFactura", required = true) Long idFactura) {
+			@NotNull @RequestParam(value = "idFactura", required = true) Long idFactura) throws Exception {
 		return facturacionService.obtenerFacturaPorId(idFactura);
 	}
 
 	@GetMapping(value = "/obtenerDetalle")
 	public ResponseEntity<JsonResponse<DetalleDTO>> obtenerDetallePorIdFactura(
-			@NotNull @RequestParam(value = "idFactura", required = true) Long idFactura) {
+			@NotNull @RequestParam(value = "idFactura", required = true) Long idFactura) throws Exception {
 		return facturacionService.obtenerDetallesPorIdFactura(idFactura);
 	}
 
 	@PostMapping(value = "/procesarFactura")
-	public ResponseEntity<JsonResponse<Void>> procesarFactura(@Valid @RequestBody FacturaDTO dto) {
+	public ResponseEntity<JsonResponse<Void>> procesarFactura(@Valid @RequestBody FacturaDTO dto) throws Exception {
 		return facturacionService.procesarFactura(dto);
 	}
 
 	@DeleteMapping(value = "/eliminarFactura")
 	public ResponseEntity<JsonResponse<Void>> eliminarFactura(
-			@NotNull @RequestParam(value = "idFactura", required = true) Long idFactura) {
+			@NotNull @RequestParam(value = "idFactura", required = true) Long idFactura) throws Exception {
 		return facturacionService.eliminarFactura(idFactura);
 	}
 
 	@DeleteMapping(value = "/eliminarDetalle")
 	public ResponseEntity<JsonResponse<Void>> eliminarDetalle(
-			@NotNull @RequestParam(value = "idDetalle", required = true) Long idDetalle) {
+			@NotNull @RequestParam(value = "idDetalle", required = true) Long idDetalle) throws Exception {
 		return facturacionService.eliminarDetalle(idDetalle);
 	}
 

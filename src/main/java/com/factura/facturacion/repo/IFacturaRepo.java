@@ -6,7 +6,10 @@ import com.factura.facturacion.modelo.Factura;
 
 public interface IFacturaRepo extends IGenericRepo<Factura, Long> {
 
-	@Query(value = "SELECT coalesce(MAX(id_factura), 1) FROM factura", nativeQuery = true)
+	@Query(value = "SELECT  "
+			+ "    COALESCE(MAX(id_factura), 1) "
+			+ "FROM "
+			+ "    factura", nativeQuery = true)
 	long consultarMaxId();
 
 }

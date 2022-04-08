@@ -82,6 +82,10 @@ public class FacturacionServicesImp implements IFacturacionService {
 
 	@Override
 	public ResponseEntity<JsonResponse<Void>> procesarFactura(FacturaDTO dto) {
+		if (dto.getFecha() < 0) {
+			return new ResponseEntity<>(new JsonResponse<>(uKeys.STATUS_ERROR, uKeys.MSG_FECHA_MENOR_HOY, null),
+					HttpStatus.OK);
+		}
 		if (util.dateMayorNow(dto.getFecha())) {
 			return new ResponseEntity<>(new JsonResponse<>(uKeys.STATUS_ERROR, uKeys.MSG_FECHA_MENOR_HOY, null),
 					HttpStatus.OK);
@@ -120,13 +124,11 @@ public class FacturacionServicesImp implements IFacturacionService {
 		}
 		boolean creando = uConverter.isLongNullOrCero(dto.getIdFactura());
 		Factura factura = new Factura();
+		if (dto.getNumeroFactura() == null) {
+			factura.setNumeroFactura(((facturaRepo.consultarMaxId() * 1000) + 1));
+		}
 		if (!creando) {
-			if (!facturaRepo.existsById(dto.getIdFactura())) {
-				factura.setNumeroFactura(((facturaRepo.consultarMaxId() + 1) * 1000));
-			}
 			factura.setIdFactura(dto.getIdFactura());
-		} else {
-			factura.setNumeroFactura(((facturaRepo.consultarMaxId() + 1) * 1000));
 		}
 		factura.setDescuento(dto.getDescuento());
 		factura.setDocumentoCliente(dto.getDocumentoCliente());

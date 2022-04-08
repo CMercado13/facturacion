@@ -20,7 +20,7 @@ public class DetalleDTO {
 	@JsonProperty(value = "cantidad_producto")
 	@Min(value = 1, message = "La cantidad mínima para un producto es 1")
 	private int cantidadProducto;
-	@JsonProperty(value = "precioUnitario")
+	@JsonProperty(value = "precio_unitario")
 	private Float precioUnitario;
 
 }
